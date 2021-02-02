@@ -1,3 +1,4 @@
 {
-    "mongoURI":"mongodb+srv://Vinayak123:Vinayak123@coderbook.mmdvw.mongodb.net/<dbname>?retryWrites=true&w=majority"
+    "mongoURI":"mongodb+srv://Vinayak123:Vinayak123@coderbook.mmdvw.mongodb.net/<dbname>?retryWrites=true&w=majority",
+    "jwtSecret": "My big secret"
 }
