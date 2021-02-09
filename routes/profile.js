@@ -15,6 +15,8 @@ router.get("/me",auth,  async (req, res)=>{
         if(!profile){
             return res.status(400).send("No profile found")
         }
+
+        res.json(profile);
     } catch (error) {
         res.status(500).send(error.message);
     }
@@ -71,4 +73,30 @@ const errors = validationResult(req);
     }
 })
 
+//@route Get /profile
+//desc get all profiles 
+//access public
+router.get("/", async (req, res)=>{
+    try {
+        const profiles = await Profile.find({}).populate("user", ["name", "avatar"] );
+        res.json(profiles);
+    } catch (error) {
+        return res.status(500).send(error.message)
+    }
+})
+
+//@route Get /profile/user/:user_id
+//desc get specific profile by id 
+//access public
+router.get("/user/:user_id", async (req, res)=>{
+    try {
+        const profile = await Profile.find({user:req.params.user_id});
+                if(!profile){
+            return res.status(400).json({msg: "Profile not found"})
+        }
+        res.json(profile);
+    } catch (error) {
+        return res.status(500).send(error.message)
+    }
+})
 module.exports = router
